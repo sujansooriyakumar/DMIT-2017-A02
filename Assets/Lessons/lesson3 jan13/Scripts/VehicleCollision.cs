@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class VehicleCollision : MonoBehaviour
 {
-    string tagToCheck;
+    public string tagToCheck;
     public UnityEvent OnCollision;
     private void OnTriggerEnter(Collider other)
     {

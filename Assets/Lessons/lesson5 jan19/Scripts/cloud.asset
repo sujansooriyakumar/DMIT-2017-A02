@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
   characterName: cloud
   stats:
-    HP: 10
-    SP: 10
+    maxHP: 20
+    currentHP: 20
+    maxSP: 20
+    currentSP: 20
     ATK: 10
     DEF: 10
     MATK: 10
