@@ -15,7 +15,17 @@ public class JSonSaving : MonoBehaviour
         string json = JsonUtility.ToJson(saveProfile, true);
 
         File.WriteAllText(filePath, json);
+        
     }
+
+    public void SaveData(SaveProfile profile_)
+    {
+        string file = filePath + profile_.profileName + ".json";
+        string json = JsonUtility.ToJson(profile_, true);
+        File.WriteAllText(file, json);
+    }
+
+
 
     [ContextMenu("JSON Load")]
 
