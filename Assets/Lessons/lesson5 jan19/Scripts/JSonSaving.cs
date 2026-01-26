@@ -12,7 +12,8 @@ public class JSonSaving : MonoBehaviour
     {
         SaveProfile saveProfile = new SaveProfile("Sujan", 1111);
         string file = filePath + profileName + ".json";
-        string json = JsonUtility.ToJson(saveProfile, true);
+        string filePathFixed = Path.Combine(Application.persistentDataPath, "sujan.json");
+        string json = JsonUtility.ToJson(filePathFixed, true);
 
         File.WriteAllText(filePath, json);
         
