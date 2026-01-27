@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ public class PlayerAnimation : MonoBehaviour
     public List<AnimationStateData> animations = new List<AnimationStateData>();
     private SpriteRenderer sr;
     bool isPlaying = false;
-
+    private PlayerAnimationState currentState = PlayerAnimationState.IDLE_DOWN;
     private Dictionary<PlayerAnimationState, AnimationData> animationDictionary = new Dictionary<PlayerAnimationState, AnimationData>();
 
     private void Start()
@@ -32,24 +33,67 @@ public class PlayerAnimation : MonoBehaviour
 
     public void InitializeAnimation(AnimationData animationData)
     {
+
+        StopAllCoroutines();
         StartCoroutine(PlayAnimation(animationData));
     }
 
     public void SetAnimationState(Vector2 moveDirection)
     {
-        if(moveDirection.y < 0)
+        if (moveDirection.y < 0)
         {
-            InitializeAnimation(animationDictionary[PlayerAnimationState.WALK_DOWN]);
+            currentState = PlayerAnimationState.WALK_DOWN;
         }
-        PlayerAnimationState currentState;
-        // using a switch case, check for the current state of the player
-        // y > 0 = WALK_UP
-        // x < 0 = WALK_LEFT
+        else if (moveDirection.y > 0)
+        {
+            currentState = PlayerAnimationState.WALK_UP;
+        }
+        else if (moveDirection.x > 0)
+        {
+            currentState = PlayerAnimationState.WALK_LEFT;
+
+        } 
+
+        else if(moveDirection.x < 0)
+        {
+            currentState = PlayerAnimationState.WALK_RIGHT;
+
+        }
+
+        if(moveDirection == Vector2.zero)
+        {
+            currentState = GetIdleState(currentState);
+        }
+
+        InitializeAnimation(animationDictionary[currentState]);
 
 
-        // how do we handle idle animations?
+    }
 
-        // InitializeAnimation(animationDictionary[currentState]);
+    private PlayerAnimationState GetIdleState(PlayerAnimationState currentState)
+    {
+        PlayerAnimationState state = PlayerAnimationState.IDLE_UP;
+
+        switch (currentState)
+        {
+            case PlayerAnimationState.WALK_UP: 
+                state = PlayerAnimationState.IDLE_UP;
+                break;
+            case PlayerAnimationState.WALK_DOWN: 
+                state = PlayerAnimationState.IDLE_DOWN;
+                break;
+            case PlayerAnimationState.WALK_LEFT:
+                state = PlayerAnimationState.IDLE_LEFT;
+                break;
+            case PlayerAnimationState.WALK_RIGHT:
+                state = PlayerAnimationState.IDLE_RIGHT;
+                break;
+            default:
+                break;
+        }
+
+        return state;
+
     }
 
     private IEnumerator PlayAnimation(AnimationData animation)
@@ -77,13 +121,7 @@ public class PlayerAnimation : MonoBehaviour
     }
 }
 
-[CreateAssetMenu(fileName = "Animation", menuName = "Animation")]
-public class AnimationData : ScriptableObject
-{
-    public string animationName;
-    public Sprite[] frames;
-    public float frameDelay;
-}
+
 
 public enum PlayerAnimationState
 {
