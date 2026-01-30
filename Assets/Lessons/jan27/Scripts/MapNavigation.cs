@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MapNavigation : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class MapNavigation : MonoBehaviour
     public static MapNavigation Instance;
     public event Action<PlayerAnimationState> OnEnterMap;
     public GameObject currentMap;
+
+    public UnityEvent OnNavigate;
 
     private void Awake()
     {
@@ -40,6 +43,7 @@ public class MapNavigation : MonoBehaviour
 
         Vector3 newPosition = g.GetCellCenterWorld(mapDictionary[mapID].entryPoints[entryPointID].cell);
         player.position = newPosition;
+        OnNavigate?.Invoke();
     }
 }
 
