@@ -12,10 +12,7 @@ public class MeleeEnemy : Enemy
         HP -= 5;
     }
 
-    public override void Patrol()
-    {
-        throw new System.NotImplementedException();
-    }
+   
 
     public override void Pursue()
     {

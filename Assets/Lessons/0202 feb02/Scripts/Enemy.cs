@@ -12,6 +12,7 @@ public abstract class Enemy : MonoBehaviour
     public float attackDelay;
     public Vector2 playerPosition;
     private Coroutine attackCoroutine;
+
     private void Awake()
     {
         sightline.OnOverlap += SetPlayerPosition;
@@ -22,7 +23,10 @@ public abstract class Enemy : MonoBehaviour
         playerPosition = position;
     }
 
-    public abstract void Patrol();
+    public void Patrol()
+    {
+
+    }
     public abstract void Attack();
     public abstract void TakeDamage();
     public abstract void Die();
