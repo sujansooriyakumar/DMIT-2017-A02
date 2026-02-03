@@ -11,12 +11,7 @@ public class RangedEnemy : Enemy
         obj.GetComponent<SimpleProjectile>().InstantiateProjectile(new Vector2(0, -1));
     }
 
-    [ContextMenu("Attack")]
-    public void StartAttackCoroutine()
-    {
-        StartCoroutine(AttackCoroutine());
-
-    }
+   
     public override void Die()
     {
         throw new System.NotImplementedException();

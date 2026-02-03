@@ -6,21 +6,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(TopDownPlayerMovement))]
+[RequireComponent(typeof(SpriteAnimator))]
 public class PlayerAnimation : MonoBehaviour
 {
     public List<AnimationStateData> animations = new List<AnimationStateData>();
-    private SpriteRenderer sr;
-    bool isPlaying = false;
+    private SpriteAnimator spriteAnimator;
     private PlayerAnimationState currentState = PlayerAnimationState.IDLE_DOWN;
     private Dictionary<PlayerAnimationState, AnimationData> animationDictionary = new Dictionary<PlayerAnimationState, AnimationData>();
 
     private void Start()
     {
         InitializeDictionary();
-        sr = GetComponent<SpriteRenderer>();
         TopDownPlayerMovement playerMovement = GetComponent<TopDownPlayerMovement>();
         playerMovement.OnMove += SetAnimationState;
-
+        spriteAnimator = GetComponent<SpriteAnimator>();
 
     }
     public void InitializeDictionary()
@@ -31,12 +30,7 @@ public class PlayerAnimation : MonoBehaviour
         }
         }
 
-    public void InitializeAnimation(AnimationData animationData)
-    {
-
-        StopAllCoroutines();
-        StartCoroutine(PlayAnimation(animationData));
-    }
+    
 
     public void SetAnimationState(Vector2 moveDirection)
     {
@@ -65,7 +59,7 @@ public class PlayerAnimation : MonoBehaviour
             currentState = GetIdleState(currentState);
         }
 
-        InitializeAnimation(animationDictionary[currentState]);
+        spriteAnimator.InitializeAnimation(animationDictionary[currentState]);
 
 
     }
@@ -96,29 +90,7 @@ public class PlayerAnimation : MonoBehaviour
 
     }
 
-    private IEnumerator PlayAnimation(AnimationData animation)
-    {
-        isPlaying = true;
-        sr.sprite = animation.frames[0];
-        int frameCount = animation.frames.Length;
-        int frameIndex = 0;
-
-        while (isPlaying)
-        {
-            yield return new WaitForSeconds(animation.frameDelay);
-            frameIndex++;
-            if (frameIndex >= animation.frames.Length) frameIndex = 0;
-            sr.sprite = animation.frames[frameIndex];
-
-            yield return null;
-        }
-        yield return null;
-    }
-
-    public void StopPlaying()
-    {
-        isPlaying = false;
-    }
+   
 }
 
 
