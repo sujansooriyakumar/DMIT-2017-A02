@@ -10,6 +10,6 @@ public class Dummy : MonoBehaviour
         }
 
         Enemy e = collision.gameObject.GetComponent<Enemy>();
-        e.TakeDamage();
+        //e.TakeDamage();
     }
 }
