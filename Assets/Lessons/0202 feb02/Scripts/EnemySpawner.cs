@@ -18,4 +18,14 @@ public class EnemySpawner : MonoBehaviour
         e.DEF = enemyToSpawn.DEF; 
         e.ATK = enemyToSpawn.ATK;
     }
+
+    public void Spawn(EnemySO enemy, int hp)
+    {
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        GameObject tmp = Instantiate(enemy.prefab, spawnPoint.position, Quaternion.identity);
+        Enemy e = tmp.GetComponent<Enemy>();
+        e.HP = hp;
+        e.DEF = enemy.DEF;
+        e.ATK = enemy.ATK;
+    }
 }

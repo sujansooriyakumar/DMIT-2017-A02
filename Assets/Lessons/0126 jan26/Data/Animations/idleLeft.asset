@@ -16,3 +16,4 @@ MonoBehaviour:
   frames:
   - {fileID: -196935662, guid: 9103e0934a9d2a14a9658d7f4fc4f750, type: 3}
   frameDelay: 0
+  loop: 1
