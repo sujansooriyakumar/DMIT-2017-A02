@@ -1,15 +1,27 @@
 using UnityEngine;
 
-public class Dummy : MonoBehaviour
+public class Dummy : MonoBehaviour, IDamageable, IInteractable
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Interact()
     {
-        if (collision.gameObject.GetComponent<Enemy>() == null)
-        {
-            return;
-        }
-
-        Enemy e = collision.gameObject.GetComponent<Enemy>();
-        //e.TakeDamage();
+        // display dialog line
     }
+
+    public void TakeDamage(float damageAmount)
+    {
+        // hp -= damageAmount
+    }
+
+    /*public void Explosion()
+    {
+        GameObject[] inRadius;
+
+        foreach(GameObject g in inRadius)
+        {
+            if(g.GetComponent<IDamageable>() != null)
+            {
+                g.GetComponent<IDamageable>().TakeDamage(50f);
+            }
+        }
+    }*/
 }
