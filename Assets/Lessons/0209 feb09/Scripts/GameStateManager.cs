@@ -6,7 +6,8 @@ using UnityEngine;
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager Instance;
-    public List<MapState> mapStates;
+    public GameState gameState;
+   // public List<MapState> mapStates;
     public Transform mapParent;
     private EnemySpawner spawner;
     private MapState currentMap;
@@ -17,15 +18,16 @@ public class GameStateManager : MonoBehaviour
     }
     private void Start()
     {
-        foreach(MapState map in mapStates)
+        foreach(MapState map in gameState.mapStates)
         {
             map.InitializeEnemyDictionary();
         }
+        InitializeMap(0);
     }
     public void InitializeMap(int mapID_)
     {
        
-        foreach (MapState mapState in mapStates)
+        foreach (MapState mapState in gameState.mapStates)
         {
             if (mapState.mapData.mapID == mapID_)
             {
@@ -35,7 +37,6 @@ public class GameStateManager : MonoBehaviour
         BeginEnemySpawn(currentMap);
     }
 
-    [ContextMenu("Try Save")]
     public void SaveMapState()
     {
         if (spawner == null) return;
@@ -52,6 +53,19 @@ public class GameStateManager : MonoBehaviour
         foreach(EnemyState enemy in map.enemies)
         {
             if(enemy.currentHP > 0) spawner.Spawn(enemy);
+        }
+    }
+
+    public void ResetAllMaps()
+    {
+        foreach(MapState mapState in gameState.mapStates)
+        {
+           
+                foreach(KeyValuePair<int, EnemyState> pair in mapState.enemyDictionary)
+                {
+                    pair.Value.currentHP = pair.Value.maxHP;
+                }
+            
         }
     }
 }
@@ -81,4 +95,12 @@ public class EnemyState
     public int enemyID;
     public EnemySO enemyData;
     public int currentHP;
+    public int maxHP;
+}
+
+[Serializable]
+public class GameState
+{
+    public List<MapState> mapStates;
+
 }

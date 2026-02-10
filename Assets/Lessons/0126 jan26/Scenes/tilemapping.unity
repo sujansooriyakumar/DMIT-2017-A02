@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 417054115}
   - component: {fileID: 417054114}
-  - component: {fileID: 417054113}
+  - component: {fileID: 417054116}
   m_Layer: 0
   m_Name: GameStateManager
   m_TagString: Untagged
@@ -348,33 +348,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &417054113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417054112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b994c104ea413946b54a5dad3c751ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameObjectEventHandler
-  OnEnabled:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 417054114}
-        m_TargetAssemblyTypeName: GameStateManager, Assembly-CSharp
-        m_MethodName: InitializeMap
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &417054114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,23 +360,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b610089891d94bd4baf7a700d5fb432c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
-  mapStates:
-  - mapData: {fileID: 11400000, guid: 75432c3dede4f2247a58dded50512147, type: 2}
-    enemies:
-    - enemyID: 0
-      enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
-      currentHP: 0
-    - enemyID: 1
-      enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
-      currentHP: 3
-  - mapData: {fileID: 11400000, guid: a14be61778e44534eb86dccf35a03b65, type: 2}
-    enemies:
-    - enemyID: 0
-      enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
-      currentHP: 20
-    - enemyID: 1
-      enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
-      currentHP: 15
+  gameState:
+    mapStates:
+    - mapData: {fileID: 11400000, guid: 75432c3dede4f2247a58dded50512147, type: 2}
+      enemies:
+      - enemyID: 0
+        enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
+        currentHP: 5
+        maxHP: 5
+      - enemyID: 1
+        enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
+        currentHP: 10
+        maxHP: 10
+    - mapData: {fileID: 11400000, guid: a14be61778e44534eb86dccf35a03b65, type: 2}
+      enemies:
+      - enemyID: 0
+        enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
+        currentHP: 2
+        maxHP: 2
   mapParent: {fileID: 1690206204}
 --- !u!4 &417054115
 Transform:
@@ -420,6 +394,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &417054116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417054112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1fa606a8c4b6f48bd8b10c1cb799bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JSonSaving
+  saveName: test
 --- !u!1001 &526762794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -632,15 +619,15 @@ GameObject:
   m_Component:
   - component: {fileID: 652514196}
   - component: {fileID: 652514195}
-  - component: {fileID: 652514194}
   - component: {fileID: 652514193}
+  - component: {fileID: 652514197}
   m_Layer: 0
   m_Name: treasure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!60 &652514193
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -691,18 +678,6 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &652514194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652514192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e02ad1707e73c749ab7dc64f42ce5da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Treasure
 --- !u!212 &652514195
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -776,6 +751,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &652514197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652514192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9ac61cf113b9e4f90779eb0964ef9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableItem
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &986156432
 GameObject:
   m_ObjectHideFlags: 0

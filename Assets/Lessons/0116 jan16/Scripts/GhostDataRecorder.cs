@@ -22,7 +22,7 @@ public class GhostDataRecorder : MonoBehaviour
         isRecording = false;
         SaveProfile profile = new SaveProfile("sujan", 10);
         profile.ghostData = ghostData;
-        save.SaveData(profile);
+       // save.SaveData(profile);
     }
     public void StartRecording() { isRecording = true; }
     private void FixedUpdate()
