@@ -5,27 +5,19 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
-    public List<EnemySO> spawnPool = new List<EnemySO>();
-
+    public List<Enemy> activeEnemies = new List<Enemy>();
     [ContextMenu("Spawn Enemy")]
-    public void Spawn()
-    {
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        EnemySO enemyToSpawn = spawnPool[Random.Range(0, spawnPool.Count)];
-        GameObject tmp = Instantiate(enemyToSpawn.prefab, spawnPoint.position, Quaternion.identity);
-        Enemy e = tmp.GetComponent<Enemy>();
-        e.HP = enemyToSpawn.HP;
-        e.DEF = enemyToSpawn.DEF; 
-        e.ATK = enemyToSpawn.ATK;
-    }
 
-    public void Spawn(EnemySO enemy, int hp)
+
+    public void Spawn(EnemyState enemy)
     {
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        GameObject tmp = Instantiate(enemy.prefab, spawnPoint.position, Quaternion.identity);
+        GameObject tmp = Instantiate(enemy.enemyData.prefab, spawnPoint.position, Quaternion.identity);
         Enemy e = tmp.GetComponent<Enemy>();
-        e.HP = hp;
-        e.DEF = enemy.DEF;
-        e.ATK = enemy.ATK;
+        e.HP = enemy.currentHP;
+        e.DEF = enemy.enemyData.DEF;
+        e.ATK = enemy.enemyData.ATK;
+        e.enemyID = enemy.enemyID;
+        activeEnemies.Add(e);
     }
 }

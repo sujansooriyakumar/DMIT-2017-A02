@@ -5,26 +5,45 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
+    public static GameStateManager Instance;
     public List<MapState> mapStates;
     public Transform mapParent;
     private EnemySpawner spawner;
+    private MapState currentMap;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+    private void Start()
+    {
+        foreach(MapState map in mapStates)
+        {
+            map.InitializeEnemyDictionary();
+        }
+    }
     public void InitializeMap(int mapID_)
     {
-        MapState targetMap = null;
+       
         foreach (MapState mapState in mapStates)
         {
-            if (mapState.mapID == mapID_)
+            if (mapState.mapData.mapID == mapID_)
             {
-                targetMap = mapState;
+                currentMap = mapState;
             }
         }
-        BeginEnemySpawn(targetMap);
+        BeginEnemySpawn(currentMap);
     }
 
+    [ContextMenu("Try Save")]
     public void SaveMapState()
     {
-
+        if (spawner == null) return;
+        List<Enemy> activeEnemies = spawner.activeEnemies;
+        foreach(Enemy enemy in activeEnemies)
+        {
+            currentMap.enemyDictionary[enemy.enemyID].currentHP = enemy.HP;
+        }
     }
 
     public void BeginEnemySpawn(MapState map)
@@ -32,7 +51,7 @@ public class GameStateManager : MonoBehaviour
         spawner = mapParent.GetComponentInChildren<EnemySpawner>();
         foreach(EnemyState enemy in map.enemies)
         {
-            spawner.Spawn(enemy.enemyData, enemy.currentHP);
+            if(enemy.currentHP > 0) spawner.Spawn(enemy);
         }
     }
 }
@@ -40,9 +59,20 @@ public class GameStateManager : MonoBehaviour
 [Serializable]
 public class MapState
 {
-    public int mapID;
+    public MapSO mapData;
 
     public List<EnemyState> enemies;
+    public Dictionary<int, EnemyState> enemyDictionary;
+
+    public void InitializeEnemyDictionary()
+    {
+        enemyDictionary
+             = new Dictionary<int, EnemyState>();
+        foreach(EnemyState enemy in enemies)
+        {
+            enemyDictionary.Add(enemy.enemyID, enemy);
+        }
+    }
 }
 
 [Serializable]
