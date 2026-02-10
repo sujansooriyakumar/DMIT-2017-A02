@@ -22,6 +22,11 @@ public class GameStateManager : MonoBehaviour
         BeginEnemySpawn(targetMap);
     }
 
+    public void SaveMapState()
+    {
+
+    }
+
     public void BeginEnemySpawn(MapState map)
     {
         spawner = mapParent.GetComponentInChildren<EnemySpawner>();

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5541c600f1ae4747b276fb5cd12d8c8, type: 3}
   m_Name: dave
   m_EditorClassIdentifier: Assembly-CSharp::EnemySO
-  prefab: {fileID: 1822091895324413483, guid: 857bd838465053143b22235f5c72519e, type: 3}
+  prefab: {fileID: 2643663724197277252, guid: 94bd3db50dac4474ea88c04aca3c2f69, type: 3}
   HP: 10
   ATK: 10
   DEF: 10
