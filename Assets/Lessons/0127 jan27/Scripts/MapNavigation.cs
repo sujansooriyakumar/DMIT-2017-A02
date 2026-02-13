@@ -37,8 +37,9 @@ public class MapNavigation : MonoBehaviour
 
     public void GoToMap(int mapID, int entryPointID)
     {
-        GameStateManager.Instance.SaveMapState();
+        GameStateManager.Instance.SaveGameState();
         Destroy(currentMap);
+        currentMap.GetComponentInChildren<EnemySpawner>().ClearEnemies();
         currentMap = Instantiate(mapDictionary[mapID].prefab, mapParent);
 
         Grid g = currentMap.GetComponent<Grid>();
