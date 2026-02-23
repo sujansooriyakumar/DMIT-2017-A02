@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3dfe5393900424585bd009de990091, type: 3}
   m_Name: sample dialog
   m_EditorClassIdentifier: Assembly-CSharp::DialogSO
-  dialogLine: 
-  speakerName: 
-  portrait: {fileID: 0}
+  dialogLine: Sometimes a hypocrite is nothing more than a man in the process of
+    changing.
+  speakerName: Dalinar Kholin
+  portrait: {fileID: 1052775822, guid: bccff845f0f2172499d9f045b36a0044, type: 3}
+  dialogChoices:
+  - index: 0
+    dialogLine: 
+  - index: 0
+    dialogLine: 

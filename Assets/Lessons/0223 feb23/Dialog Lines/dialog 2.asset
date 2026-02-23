@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3dfe5393900424585bd009de990091, type: 3}
   m_Name: dialog 2
   m_EditorClassIdentifier: Assembly-CSharp::DialogSO
-  dialogLine: 
-  speakerName: 
-  portrait: {fileID: 0}
+  dialogLine: Honor is dead, but I'll see what I can do.
+  speakerName: Kaladin
+  portrait: {fileID: -424281277, guid: bccff845f0f2172499d9f045b36a0044, type: 3}

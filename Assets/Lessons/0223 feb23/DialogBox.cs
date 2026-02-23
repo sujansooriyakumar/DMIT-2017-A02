@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,19 +9,26 @@ using UnityEngine.UI;
 
 public class DialogBox : MonoBehaviour
 {
+    public static DialogBox Instance;
+
+    [Header("UI References")]
     public TextMeshProUGUI dialogText;
     public TextMeshProUGUI speakerName;
     public Image portait;
+
+    [Header("Data")]
     public DialogDatabaseSO dialogDatabase;
     private Dictionary<int, DialogSO> dialogDictionary;
     public float typingSpeed = 0.02f;
 
+    [Header("Input")]
     public InputAction continueDialog;
     private bool inputRecieved = false;
+    
     public UnityEvent OnMessageComplete;
-
     private void Awake()
     {
+        Instance = this;
         continueDialog.Enable();
         continueDialog.performed += ContinueDialog;
     }
@@ -57,6 +65,7 @@ public class DialogBox : MonoBehaviour
             dialogText.ForceMeshUpdate();
             yield return new WaitForSeconds(typingSpeed);
         }
+
         inputRecieved = false;
         yield return new WaitUntil(() => inputRecieved);
         OnMessageComplete?.Invoke();
