@@ -362,22 +362,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameStateManager
   gameState:
     mapStates:
-    - mapData: {fileID: 11400000, guid: 75432c3dede4f2247a58dded50512147, type: 2}
-      enemies:
-      - enemyID: 0
-        enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
-        currentHP: 5
-        maxHP: 5
-      - enemyID: 1
-        enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
-        currentHP: 10
-        maxHP: 10
-    - mapData: {fileID: 11400000, guid: a14be61778e44534eb86dccf35a03b65, type: 2}
-      enemies:
-      - enemyID: 0
-        enemyData: {fileID: 11400000, guid: 543c2d5899a40d043b6467fe4d1b30b7, type: 2}
-        currentHP: 2
-        maxHP: 2
+    - mapID: 0
+      enemyStates: []
+    - mapID: 0
+      enemyStates: []
   mapParent: {fileID: 1690206204}
 --- !u!4 &417054115
 Transform:
