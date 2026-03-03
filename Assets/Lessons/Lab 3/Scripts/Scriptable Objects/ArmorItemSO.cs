@@ -18,5 +18,6 @@ public enum ArmorSlot
     HELM,
     CHEST,
     LEGS,
-    BOOTS
+    BOOTS,
+    WEAPON
 }
