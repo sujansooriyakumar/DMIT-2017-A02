@@ -6,13 +6,13 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public Dictionary<InventoryItemSO, InventoryItemData> playerInventory = new Dictionary<InventoryItemSO, InventoryItemData>();
-    public WeaponItemSO itemToAdd;
-
+    public InventoryItemSO[] tmp;
     private void Start()
     {
-        AddItem(itemToAdd);
-        AddItem(itemToAdd);
-        Debug.Log(playerInventory[itemToAdd].quantity);
+        foreach (InventoryItemSO item in tmp)
+        {
+            AddItem(item);
+        }
     }
 
     public void AddItem(InventoryItemSO itemToAdd_)
@@ -79,6 +79,7 @@ public class ArmorItemData:InventoryItemData
         this.armorDurability = config.armorDurability;
         this.armorSlot = config.armorSlot;
         this.icon = config.icon;
+        quantity = 1;
     }
 }
 
