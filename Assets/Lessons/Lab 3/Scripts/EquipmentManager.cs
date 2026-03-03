@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,9 @@ public class EquipmentManager : MonoBehaviour
 {
     public Dictionary<ArmorSlot, InventoryItemData> equipmentSlots;
     public static EquipmentManager instance;
+    public event Action<Dictionary<ArmorSlot, InventoryItemData>> onEquip;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
         InitializeEquipment();
@@ -18,7 +20,7 @@ public class EquipmentManager : MonoBehaviour
         equipmentSlots.Add(ArmorSlot.HELM, null);
         equipmentSlots.Add(ArmorSlot.CHEST, null);
         equipmentSlots.Add(ArmorSlot.LEGS, null);
-        equipmentSlots.Add(ArmorSlot.BOOTS, null);
+        equipmentSlots.Add(ArmorSlot.ARMS, null);
         equipmentSlots.Add(ArmorSlot.WEAPON, null);
     }
     public void EquipItem(InventoryItemData itemToEquip)
@@ -33,6 +35,7 @@ public class EquipmentManager : MonoBehaviour
             equipmentSlots[ArmorSlot.WEAPON] = weapon;
             Debug.Log(equipmentSlots[ArmorSlot.WEAPON].itemName + " is equipped");
         }
+        onEquip?.Invoke(equipmentSlots);
     }
 }
 
