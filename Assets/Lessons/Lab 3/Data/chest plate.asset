@@ -17,4 +17,4 @@ MonoBehaviour:
   icon: {fileID: -1789066953, guid: 1d3231d5ce24cc04dadff03ff57d9c5c, type: 3}
   armorRating: 0
   armorDurability: 0
-  armorSlot: 0
+  armorSlot: 1
