@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class InventoryContainer : MonoBehaviour
     public List<InventoryItemSO> startingItems = new();
     public Dictionary<InventoryItemSO, InventoryItemData> containerContents = new Dictionary<InventoryItemSO, InventoryItemData>();
     public InventoryManager playerInventory;
+    public event Action<InventoryContainer> onContainerUpdated;
 
     private void Start()
     {
@@ -27,6 +29,8 @@ public class InventoryContainer : MonoBehaviour
         {
             containerContents[itemToAdd_].quantity += 1;
         }
+        Debug.Log("Added item " + itemToAdd_.itemName + " to container.");
+        onContainerUpdated?.Invoke(this);
     }
 
     public void AddItemToPlayerInventory(InventoryItemSO itemToAdd_)
@@ -40,6 +44,9 @@ public class InventoryContainer : MonoBehaviour
         else { containerContents.Remove(itemToAdd_); }
 
         playerInventory.AddItem(itemToAdd_);
+        Debug.Log("Added item " + itemToAdd_.itemName + " to player inventory.");
+        onContainerUpdated?.Invoke(this);
+
     }
 
 }
