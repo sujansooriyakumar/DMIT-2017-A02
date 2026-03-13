@@ -22,6 +22,13 @@ public class QuestManager : MonoBehaviour
 
     }
 
+    [ContextMenu("Activate Quest")]
+    public void ActivateQuest()
+    {
+        ActivateQuest(quests[0]);
+
+    }
+
     [ContextMenu ("Initialize Quests")]
     public void InitializeQuestLibrary()
     {
