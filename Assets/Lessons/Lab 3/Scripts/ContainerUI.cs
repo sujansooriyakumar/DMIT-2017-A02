@@ -53,7 +53,20 @@ public class ContainerUI : MonoBehaviour
             Destroy(obj);
         }
         containerButtons.Clear();
+        Dictionary<InventoryItemSO, InventoryItemData> playerInventoryRef = targetInventory.playerInventory;
+        Dictionary<InventoryItemSO, InventoryItemData> containerInventoryRef = container_.containerContents;
+        foreach (InventoryItemData item in playerInventoryRef.Values)
+        {
+            GameObject tmp = Instantiate(buttonPrefab, inventoryContentParent);
+            inventoryButtons.Add(tmp);
+            tmp.GetComponent<ContainerButton>().InitializeButton(item, container_, false);
+        }
 
-        InitializeContainerUI(container_);
+        foreach (InventoryItemData item in containerInventoryRef.Values)
+        {
+            GameObject tmp = Instantiate(buttonPrefab, containerContentParent);
+            containerButtons.Add(tmp);
+            tmp.GetComponent<ContainerButton>().InitializeButton(item, container_, true);
+        }
     }
 }
